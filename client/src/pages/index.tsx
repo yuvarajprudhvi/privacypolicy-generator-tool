@@ -18,15 +18,17 @@ const Home: React.FC = () => {
               <p className="mt-6 text-xl text-blue-100 max-w-prose mx-auto">
                 Generate a customized privacy policy compliant with GDPR and CCPA in just a few minutes. No legal expertise required.
               </p>
-              <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+              <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center sm:space-x-6">
+                <div>
                   <Link href="/generator">
-                    <Button className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-10">
+                    <Button size="lg" className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50">
                       Get Started
                     </Button>
                   </Link>
+                </div>
+                <div className="mt-4 sm:mt-0">
                   <Link href="/templates">
-                    <Button variant="outline" className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-opacity-60 hover:bg-opacity-70 sm:px-10">
+                    <Button variant="outline" size="lg" className="w-full flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md shadow-sm text-white bg-opacity-20 hover:bg-opacity-30">
                       View Templates
                     </Button>
                   </Link>
