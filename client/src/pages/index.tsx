@@ -28,7 +28,7 @@ const Home: React.FC = () => {
                 </div>
                 <div className="mt-4 sm:mt-0">
                   <Link href="/templates">
-                    <Button variant="outline" size="lg" className="w-full flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md shadow-sm text-white bg-opacity-20 hover:bg-opacity-30">
+                    <Button variant="outline" size="lg" className="w-full flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-medium rounded-md shadow-sm text-white bg-blue-600 bg-opacity-30 hover:bg-opacity-50">
                       View Templates
                     </Button>
                   </Link>
