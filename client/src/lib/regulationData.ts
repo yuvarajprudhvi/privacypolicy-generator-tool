@@ -31,7 +31,7 @@ export const privacyRegulations: RegulationInfo[] = [
       'Restrictions on transfer of personal data outside India',
       'Appointment of Data Protection Officers for Significant Data Fiduciaries'
     ],
-    link: 'https://digitalindia.gov.in/digital-personal-data-protection-act-2023',
+    link: 'https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf',
     penalties: 'Up to ₹250 crore (approximately $30 million) for significant violations including data breaches and non-compliance with child data protection',
     applicability: 'Applies to processing of digital personal data within India and processing outside India if related to offering goods or services to Data Principals in India'
   },
