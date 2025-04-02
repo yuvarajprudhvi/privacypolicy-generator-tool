@@ -48,8 +48,7 @@ const FinalizeStep: React.FC<FormStepProps> = ({ data, prevStep, updateData }) =
     navigator.clipboard.writeText(policyText);
     toast({
       title: "Copied to Clipboard",
-      description: "Your privacy policy has been copied to the clipboard.",
-      variant: "success"
+      description: "Your privacy policy has been copied to the clipboard."
     });
   };
 
@@ -75,8 +74,7 @@ const FinalizeStep: React.FC<FormStepProps> = ({ data, prevStep, updateData }) =
       
       toast({
         title: "Download Started",
-        description: "Your privacy policy has been downloaded.",
-        variant: "success"
+        description: "Your privacy policy has been downloaded."
       });
     } catch (error) {
       toast({
@@ -136,7 +134,7 @@ const FinalizeStep: React.FC<FormStepProps> = ({ data, prevStep, updateData }) =
               </Button>
               <Button 
                 onClick={handleDownloadPolicy} 
-                className="bg-primary-600 hover:bg-primary-700 text-white flex items-center"
+                className="flex items-center"
                 disabled={isGenerating || isDownloading}
               >
                 <Download className="mr-2 h-4 w-4" />
@@ -158,7 +156,7 @@ const FinalizeStep: React.FC<FormStepProps> = ({ data, prevStep, updateData }) =
                 <TabsContent value="text" className="mt-4">
                   {isGenerating ? (
                     <div className="flex justify-center py-6">
-                      <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary-600"></div>
+                      <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
                     </div>
                   ) : (
                     <div className="bg-gray-50 rounded-md p-4">

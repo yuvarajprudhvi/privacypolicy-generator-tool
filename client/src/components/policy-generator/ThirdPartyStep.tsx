@@ -114,7 +114,6 @@ const ThirdPartyStep: React.FC<FormStepProps> = ({ data, updateData, nextStep, p
             <Button 
               type="button" 
               onClick={nextStep}
-              className="bg-primary-600 hover:bg-primary-700 text-white"
             >
               Continue
             </Button>

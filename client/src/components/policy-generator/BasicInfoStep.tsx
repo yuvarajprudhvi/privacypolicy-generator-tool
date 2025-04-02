@@ -169,7 +169,6 @@ const BasicInfoStep: React.FC<FormStepProps> = ({ data, updateData, nextStep }) 
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-end mt-6 -mx-6 -mb-6 rounded-b-lg">
               <Button 
                 type="submit" 
-                className="bg-primary-600 hover:bg-primary-700 text-white"
                 disabled={!isFormValid()}
               >
                 Continue

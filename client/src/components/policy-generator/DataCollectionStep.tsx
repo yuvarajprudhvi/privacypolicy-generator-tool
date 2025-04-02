@@ -179,7 +179,6 @@ const DataCollectionStep: React.FC<FormStepProps> = ({ data, updateData, nextSte
             <Button 
               type="button" 
               onClick={nextStep}
-              className="bg-primary-600 hover:bg-primary-700 text-white"
               disabled={!isFormValid()}
             >
               Continue
