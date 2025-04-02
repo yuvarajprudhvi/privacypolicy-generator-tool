@@ -32,8 +32,8 @@ import {
   MapPin
 } from 'lucide-react';
 
-// URL for the map topology JSON
-const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+// URL for the map topology JSON - using a more reliable source
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 // Helper function to get severity based on penalties
 const getSeverityLevel = (regulation: RegulationInfo): 'low' | 'medium' | 'high' => {
@@ -77,6 +77,7 @@ const RegulationMap: React.FC = () => {
   const [selectedContinent, setSelectedContinent] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [mapError, setMapError] = useState<boolean>(false);
   
   // Detect mobile devices
   useEffect(() => {
@@ -86,6 +87,20 @@ const RegulationMap: React.FC = () => {
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
     return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+  
+  // Effect for handling map loading errors
+  useEffect(() => {
+    // Set a timeout to check if the map loaded correctly
+    const timer = setTimeout(() => {
+      const mapElements = document.querySelectorAll('.rsm-geography');
+      if (mapElements.length === 0) {
+        console.log("Map failed to load, showing fallback view");
+        setMapError(true);
+      }
+    }, 3000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   // Filter regulations by continent and search query
@@ -127,24 +142,34 @@ const RegulationMap: React.FC = () => {
   }, [selectedContinent, searchQuery]);
 
   const handleCountryClick = (geo: any) => {
-    const { NAME, ISO_A2 } = geo.properties;
-    const regulation = getCountryRegulation(ISO_A2.toLowerCase());
+    // Different map sources may use different property names
+    const countryName = geo.properties.NAME || geo.properties.name || '';
+    const countryCode = geo.properties.ISO_A2 || geo.properties.iso_a2 || '';
+    
+    const regulation = countryCode ? getCountryRegulation(countryCode.toLowerCase()) : undefined;
     
     if (regulation) {
       setSelectedRegulation(regulation);
+    } else if (countryName) {
+      setTooltipContent(`${countryName}: No specific privacy regulation data available`);
     } else {
-      setTooltipContent(`${NAME}: No specific privacy regulation data available`);
+      setTooltipContent(`No specific privacy regulation data available`);
     }
   };
 
   const handleMouseEnter = (geo: any) => {
-    const { NAME, ISO_A2 } = geo.properties;
-    const regulation = getCountryRegulation(ISO_A2.toLowerCase());
+    // Different map sources may use different property names
+    const countryName = geo.properties.NAME || geo.properties.name || '';
+    const countryCode = geo.properties.ISO_A2 || geo.properties.iso_a2 || '';
+    
+    const regulation = countryCode ? getCountryRegulation(countryCode.toLowerCase()) : undefined;
     
     if (regulation) {
-      setTooltipContent(`${NAME}: ${regulation.name} (${regulation.year})`);
+      setTooltipContent(`${countryName}: ${regulation.name} (${regulation.year})`);
+    } else if (countryName) {
+      setTooltipContent(`${countryName}: No specific regulation data`);
     } else {
-      setTooltipContent(`${NAME}: No specific regulation data`);
+      setTooltipContent(`Hover over a country to see regulation information`);
     }
   };
 
@@ -308,72 +333,101 @@ const RegulationMap: React.FC = () => {
         {/* Map Container */}
         <div className="lg:col-span-8 bg-white rounded-lg shadow-sm p-4">
           <div style={{ height: "500px" }} className="border border-gray-100 rounded-lg overflow-hidden relative">
-            <ComposableMap
-              data-tooltip-id={tooltipId}
-              projectionConfig={{ scale: 160 }}
-            >
-              <ZoomableGroup 
-                center={position.coordinates as [number, number]} 
-                zoom={position.zoom}
-              >
-                <Geographies geography={geoUrl}>
-                  {({ geographies }) =>
-                    geographies.map(geo => {
-                      const { ISO_A2 } = geo.properties;
-                      const countryCode = ISO_A2 ? ISO_A2.toLowerCase() : '';
-                      const hasRegulation = getCountryRegulation(countryCode) !== undefined;
-                      
-                      return (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill={getCountryColor(countryCode)}
-                          stroke="#FFFFFF"
-                          strokeWidth={0.5}
-                          style={{
-                            default: {
-                              outline: "none",
-                              filter: hasRegulation ? "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1))" : "none"
-                            },
-                            hover: {
-                              fill: "#4F46E5",
-                              outline: "none",
-                              cursor: "pointer",
-                              filter: "drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))"
-                            },
-                            pressed: {
-                              fill: "#3730A3",
-                              outline: "none"
-                            }
-                          }}
-                          onMouseEnter={() => handleMouseEnter(geo)}
-                          onMouseLeave={handleMouseLeave}
-                          onClick={() => handleCountryClick(geo)}
-                        />
-                      );
-                    })
-                  }
-                </Geographies>
-              </ZoomableGroup>
-            </ComposableMap>
-            <Tooltip id={tooltipId} className="z-50 !bg-gray-900 !text-white !px-3 !py-2 !rounded-md !text-sm !opacity-95">
-              {tooltipContent}
-            </Tooltip>
-            
-            {/* Map controls legend */}
-            <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 p-2 rounded-md border border-gray-200 shadow-sm">
-              <div className="text-xs font-medium text-gray-500 mb-1">Map Legend</div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(215, 70%, 50%)' }}></div>
-                  <span className="text-xs text-gray-600">Has privacy regulation</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(0, 0%, 85%)' }}></div>
-                  <span className="text-xs text-gray-600">No specific regulation data</span>
-                </div>
+            {mapError ? (
+              // Fallback view when map fails to load
+              <div className="flex flex-col items-center justify-center h-full p-8 bg-gray-50">
+                <Globe className="h-16 w-16 text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-700 mb-2 text-center">Map Visualization Unavailable</h3>
+                <p className="text-sm text-gray-500 mb-6 text-center max-w-md">
+                  We're unable to load the interactive map at this time. 
+                  You can still browse all privacy regulations in the list view.
+                </p>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setMapError(false)}
+                  className="flex items-center gap-2"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  Try Again
+                </Button>
               </div>
-            </div>
+            ) : (
+              <>
+                <ComposableMap
+                  data-tooltip-id={tooltipId}
+                  projectionConfig={{ scale: 160 }}
+                >
+                  <ZoomableGroup 
+                    center={position.coordinates as [number, number]} 
+                    zoom={position.zoom}
+                  >
+                    <Geographies geography={geoUrl}>
+                      {({ geographies }) =>
+                        geographies.map(geo => {
+                          // Need to handle different map data formats
+                          const props = geo.properties || {};
+                          const countryCode = 
+                            (props.ISO_A2 || props.iso_a2 || props.ISO_A3 || props.iso_a3 || '').toLowerCase();
+                          
+                          // Try to get regulation data
+                          const hasRegulation = !!countryCode && getCountryRegulation(countryCode) !== undefined;
+                          
+                          // Use custom color or default
+                          const fillColor = countryCode ? getCountryColor(countryCode) : 'hsl(0, 0%, 85%)';
+                          
+                          return (
+                            <Geography
+                              key={geo.rsmKey}
+                              geography={geo}
+                              fill={fillColor}
+                              stroke="#FFFFFF"
+                              strokeWidth={0.5}
+                              style={{
+                                default: {
+                                  outline: "none",
+                                  filter: hasRegulation ? "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1))" : "none"
+                                },
+                                hover: {
+                                  fill: "#4F46E5",
+                                  outline: "none",
+                                  cursor: "pointer",
+                                  filter: "drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))"
+                                },
+                                pressed: {
+                                  fill: "#3730A3",
+                                  outline: "none"
+                                }
+                              }}
+                              onMouseEnter={() => handleMouseEnter(geo)}
+                              onMouseLeave={handleMouseLeave}
+                              onClick={() => handleCountryClick(geo)}
+                            />
+                          );
+                        })
+                      }
+                    </Geographies>
+                  </ZoomableGroup>
+                </ComposableMap>
+                <Tooltip id={tooltipId} className="z-50 !bg-gray-900 !text-white !px-3 !py-2 !rounded-md !text-sm !opacity-95">
+                  {tooltipContent}
+                </Tooltip>
+                
+                {/* Map controls legend */}
+                <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 p-2 rounded-md border border-gray-200 shadow-sm">
+                  <div className="text-xs font-medium text-gray-500 mb-1">Map Legend</div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(215, 70%, 50%)' }}></div>
+                      <span className="text-xs text-gray-600">Has privacy regulation</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'hsl(0, 0%, 85%)' }}></div>
+                      <span className="text-xs text-gray-600">No specific regulation data</span>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
