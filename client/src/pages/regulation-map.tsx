@@ -163,7 +163,7 @@ const RegulationMap: React.FC = () => {
               projectionConfig={{ scale: 160 }}
             >
               <ZoomableGroup 
-                center={position.coordinates} 
+                center={position.coordinates as [number, number]} 
                 zoom={position.zoom}
               >
                 <Geographies geography={geoUrl}>
