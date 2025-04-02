@@ -7,6 +7,8 @@ import {
   ThirdPartyCategory
 } from "@shared/schema";
 
+// The interface extends the database schema type but explicitly types the arrays
+// and adds the currentStep field for form management
 export interface PolicyFormData extends Omit<InsertPolicySettings, 'dataCollected' | 'cookieTypes' | 'thirdPartyServices'> {
   dataCollected: DataCollectionType[];
   cookieTypes: CookieType[];

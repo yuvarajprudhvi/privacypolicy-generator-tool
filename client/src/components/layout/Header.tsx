@@ -12,6 +12,7 @@ const Header: React.FC = () => {
     { href: '/', label: 'Home', active: location === '/' },
     { href: '/generator', label: 'Generator', active: location === '/generator' },
     { href: '/templates', label: 'Templates', active: location === '/templates' },
+    { href: '/policy-verification', label: 'Verify Policy', active: location === '/policy-verification' },
     { href: '/regulation-map', label: 'Regulations', active: location === '/regulation-map' },
     { href: '/faq', label: 'FAQ', active: location === '/faq' }
   ];

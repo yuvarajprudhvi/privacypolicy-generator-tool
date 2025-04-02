@@ -5,6 +5,7 @@ import Templates from "@/pages/templates";
 import FAQ from "@/pages/faq";
 import Pricing from "@/pages/pricing";
 import RegulationMap from "@/pages/regulation-map";
+import PolicyVerification from "@/pages/policy-verification";
 import NotFound from "@/pages/not-found";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" component={Home} />
           <Route path="/generator" component={Generator} />
           <Route path="/templates" component={Templates} />
+          <Route path="/policy-verification" component={PolicyVerification} />
           <Route path="/faq" component={FAQ} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/regulation-map" component={RegulationMap} />
