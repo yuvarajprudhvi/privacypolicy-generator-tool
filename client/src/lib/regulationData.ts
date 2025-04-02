@@ -15,6 +15,27 @@ export interface RegulationInfo {
 
 export const privacyRegulations: RegulationInfo[] = [
   {
+    id: 'dpdpa',
+    name: 'Digital Personal Data Protection Act (DPDPA)',
+    region: 'India',
+    countryCode: 'in',
+    year: 2023,
+    description: 'India\'s comprehensive digital personal data protection framework, enacted in August 2023, that aims to protect the digital personal data of individuals while allowing for lawful processing of such data.',
+    keyRequirements: [
+      'Lawful consent-based processing of personal data',
+      'Verifiable parental consent for processing children\'s data',
+      'Establishment of Data Protection Board of India',
+      'Data Principal rights (access, correction, erasure)',
+      'Personal data breach notification',
+      'Data Fiduciary obligations and accountability',
+      'Restrictions on transfer of personal data outside India',
+      'Appointment of Data Protection Officers for Significant Data Fiduciaries'
+    ],
+    link: 'https://digitalindia.gov.in/digital-personal-data-protection-act-2023',
+    penalties: 'Up to ₹250 crore (approximately $30 million) for significant violations including data breaches and non-compliance with child data protection',
+    applicability: 'Applies to processing of digital personal data within India and processing outside India if related to offering goods or services to Data Principals in India'
+  },
+  {
     id: 'gdpr',
     name: 'General Data Protection Regulation (GDPR)',
     region: 'European Union',
@@ -220,7 +241,9 @@ export const regulationsByContinent = {
   southAmerica: privacyRegulations.filter(reg => 
     reg.region.includes('Brazil') || reg.region.includes('South America')),
   asia: privacyRegulations.filter(reg => 
-    reg.region.includes('China') || reg.region.includes('Singapore') || reg.region.includes('Thailand')),
+    reg.region.includes('China') || reg.region.includes('Singapore') || 
+    reg.region.includes('Thailand') || reg.region.includes('India') || 
+    reg.region.includes('Japan')),
   africa: privacyRegulations.filter(reg => 
     reg.region.includes('South Africa')),
   oceania: privacyRegulations.filter(reg => 
