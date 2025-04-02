@@ -36,7 +36,7 @@ const Pricing: React.FC = () => {
         'Priority support'
       ],
       cta: 'Start Free Trial',
-      mostPopular: true
+      mostPopular: false
     },
     {
       name: 'Enterprise',
