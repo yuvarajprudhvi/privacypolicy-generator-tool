@@ -149,7 +149,7 @@ const Home: React.FC = () => {
 
           <div className="mt-10 text-center">
             <Link href="/generator">
-              <Button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3">
+              <Button className="px-8 py-3">
                 Create Your Privacy Policy
               </Button>
             </Link>

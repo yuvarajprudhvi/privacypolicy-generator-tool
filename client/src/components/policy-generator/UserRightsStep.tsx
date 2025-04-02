@@ -119,7 +119,7 @@ const UserRightsStep: React.FC<FormStepProps> = ({ data, updateData, nextStep, p
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {data.effectiveDate ? (
-                        format(data.effectiveDate, "PPP")
+                        format(new Date(data.effectiveDate), "PPP")
                       ) : (
                         <span>Pick a date</span>
                       )}
@@ -128,8 +128,8 @@ const UserRightsStep: React.FC<FormStepProps> = ({ data, updateData, nextStep, p
                   <PopoverContent className="w-auto p-0">
                     <Calendar
                       mode="single"
-                      selected={data.effectiveDate}
-                      onSelect={(date) => updateData({ effectiveDate: date || new Date() })}
+                      selected={data.effectiveDate ? new Date(data.effectiveDate) : undefined}
+                      onSelect={(date) => updateData({ effectiveDate: date ? date.toISOString().split('T')[0] : undefined })}
                       disabled={(date) => date < new Date("1900-01-01")}
                       initialFocus
                     />

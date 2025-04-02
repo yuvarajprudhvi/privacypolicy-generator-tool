@@ -34,7 +34,7 @@ const initialFormData: PolicyFormData = {
   gdprCompliance: true,
   ccpaCompliance: true,
   childrenPolicy: false,
-  effectiveDate: new Date(),
+  effectiveDate: new Date().toISOString().split('T')[0],
   currentStep: FORM_STEPS.BASIC_INFO
 };
 
