@@ -3,6 +3,7 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileText, ExternalLink, ArrowRight } from 'lucide-react';
+import PolicyTemplatePreview from '@/components/policy-generator/PolicyTemplatePreview';
 
 const Templates: React.FC = () => {
   const policyTemplates = [
@@ -72,13 +73,13 @@ const Templates: React.FC = () => {
               </ul>
             </CardContent>
             <CardFooter className="flex justify-between border-t pt-4">
-              <a 
-                href="#" 
-                className="text-sm text-gray-600 hover:text-primary-600 flex items-center"
-                onClick={(e) => e.preventDefault()}
-              >
-                Preview <ExternalLink className="h-3 w-3 ml-1" />
-              </a>
+              <PolicyTemplatePreview templateId={template.id}>
+                <button 
+                  className="text-sm text-gray-600 hover:text-primary-600 flex items-center"
+                >
+                  Preview <ExternalLink className="h-3 w-3 ml-1" />
+                </button>
+              </PolicyTemplatePreview>
               <Link href="/generator">
                 <Button size="sm" className="bg-primary-600 hover:bg-primary-700 text-white flex items-center">
                   Use Template <ArrowRight className="ml-1 h-3 w-3" />
