@@ -205,6 +205,25 @@ const Home: React.FC = () => {
       </div>
 
       {/* CTA Section */}
+      <div className="bg-white py-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm border border-gray-100 py-12">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-6">
+            Ready to Create Your Policy?
+          </h2>
+          <p className="text-xl text-center text-gray-600 mb-10">
+            Generate a custom privacy policy tailored to your website's specific needs in minutes.
+          </p>
+          <div className="text-center">
+            <Link href="/generator">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-6 text-lg">
+                Create Custom Policy
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      
+      {/* Secondary CTA Section */}
       <div className="bg-blue-700">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
