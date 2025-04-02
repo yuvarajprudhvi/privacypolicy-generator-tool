@@ -142,13 +142,17 @@ const UserRightsStep: React.FC<FormStepProps> = ({ data, updateData, nextStep, p
             <div className="p-4 bg-blue-50 rounded-md border border-blue-100">
               <div className="space-y-2">
                 <h3 className="text-sm font-medium text-blue-800">User Rights in Privacy Policies</h3>
-                <div className="text-sm text-blue-700 space-y-2">
-                  {Object.entries(USER_RIGHTS_EXPLANATIONS).map(([right, explanation]) => (
-                    <div key={right} className="flex">
-                      <span className="font-medium mr-2">• {right.charAt(0).toUpperCase() + right.slice(1)}:</span>
-                      <span>{explanation}</span>
-                    </div>
-                  ))}
+                <div className="text-sm text-blue-700">
+                  <p className="mb-2">If you are located in the European Union, you have the following rights under the GDPR:</p>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li><span className="font-medium">Right to access</span> - You have the right to request copies of your personal data.</li>
+                    <li><span className="font-medium">Right to rectification</span> - You have the right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.</li>
+                    <li><span className="font-medium">Right to erasure</span> - You have the right to request that we erase your personal data, under certain conditions.</li>
+                    <li><span className="font-medium">Right to restrict processing</span> - You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
+                    <li><span className="font-medium">Right to object to processing</span> - You have the right to object to our processing of your personal data, under certain conditions.</li>
+                    <li><span className="font-medium">Right to data portability</span> - You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
+                  </ul>
+                  <p className="mt-2">To exercise any of these rights, please contact us.</p>
                 </div>
               </div>
             </div>

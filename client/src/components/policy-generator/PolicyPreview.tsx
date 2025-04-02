@@ -145,29 +145,29 @@ const PolicyPreview: React.FC<PolicyPreviewProps> = ({ data, fullView = false })
               <h3 className="text-lg font-semibold mt-6 mb-2">5. Your Rights</h3>
               {data.gdprCompliance && (
                 <div className="mb-3">
-                  <p><strong>Under GDPR (for EU residents):</strong></p>
+                  <p><strong>If you are located in the European Union, you have the following rights under the GDPR:</strong></p>
                   <ul className="list-disc ml-6 mb-2">
-                    <li>Right to access your personal data</li>
-                    <li>Right to rectification of inaccurate data</li>
-                    <li>Right to erasure ("right to be forgotten")</li>
-                    <li>Right to restrict processing</li>
-                    <li>Right to data portability</li>
-                    <li>Right to object to processing</li>
-                    <li>Right to withdraw consent</li>
+                    <li><strong>Right to access</strong> - You have the right to request copies of your personal data.</li>
+                    <li><strong>Right to rectification</strong> - You have the right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.</li>
+                    <li><strong>Right to erasure</strong> - You have the right to request that we erase your personal data, under certain conditions.</li>
+                    <li><strong>Right to restrict processing</strong> - You have the right to request that we restrict the processing of your personal data, under certain conditions.</li>
+                    <li><strong>Right to object to processing</strong> - You have the right to object to our processing of your personal data, under certain conditions.</li>
+                    <li><strong>Right to data portability</strong> - You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
                   </ul>
+                  <p>To exercise any of these rights, please contact us.</p>
                 </div>
               )}
               
               {data.ccpaCompliance && (
                 <div>
-                  <p><strong>Under CCPA (for California residents):</strong></p>
+                  <p><strong>If you are a California resident, you have the following rights under the CCPA:</strong></p>
                   <ul className="list-disc ml-6 mb-2">
-                    <li>Right to know what personal information is collected</li>
-                    <li>Right to know whether personal information is sold or disclosed</li>
-                    <li>Right to say no to the sale of personal information</li>
-                    <li>Right to access your personal information</li>
-                    <li>Right to equal service and price (non-discrimination)</li>
+                    <li><strong>Right to know</strong> - You have the right to request that we disclose information to you about our collection and use of your personal information over the past 12 months.</li>
+                    <li><strong>Right to delete</strong> - You have the right to request that we delete any of your personal information that we collected from you and retained, subject to certain exceptions.</li>
+                    <li><strong>Right to opt-out of sales</strong> - If we sell your personal information, you have the right to opt out of the sale of your information.</li>
+                    <li><strong>Right to non-discrimination</strong> - We will not discriminate against you for exercising any of your CCPA rights.</li>
                   </ul>
+                  <p>To exercise any of these rights, please contact us.</p>
                 </div>
               )}
             </>

@@ -241,18 +241,16 @@ const generateUserRightsSection = (data: InsertPolicySettings): string => {
     userRightsSection += `
 ### GDPR Data Protection Rights
 
-If you are a resident of the European Economic Area (EEA), you have certain data protection rights. ${data.companyName} aims to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Information.
+If you are located in the European Union, you have the following rights under the GDPR:
 
-Under GDPR, you have the following rights:
+• Right to access - You have the right to request copies of your personal data.
+• Right to rectification - You have the right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.
+• Right to erasure - You have the right to request that we erase your personal data, under certain conditions.
+• Right to restrict processing - You have the right to request that we restrict the processing of your personal data, under certain conditions.
+• Right to object to processing - You have the right to object to our processing of your personal data, under certain conditions.
+• Right to data portability - You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.
 
-- **The right to access** – You have the right to request copies of your personal data.
-- **The right to rectification** – You have the right to request that we correct any information you believe is inaccurate or complete information you believe is incomplete.
-- **The right to erasure** – You have the right to request that we erase your personal data, under certain conditions.
-- **The right to restrict processing** – You have the right to request that we restrict the processing of your personal data, under certain conditions.
-- **The right to object to processing** – You have the right to object to our processing of your personal data, under certain conditions.
-- **The right to data portability** – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.
-
-If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us using the contact information provided below.
+To exercise any of these rights, please contact us.
 `;
   }
 
@@ -260,16 +258,14 @@ If you make a request, we have one month to respond to you. If you would like to
     userRightsSection += `
 ### CCPA Privacy Rights (California Residents)
 
-If you are a California resident, you are granted specific rights regarding access to your personal information. California Civil Code Section 1798.83 permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year.
+If you are a California resident, you have the following rights under the CCPA:
 
-Under CCPA, California residents have the following rights:
+• Right to know - You have the right to request that we disclose information to you about our collection and use of your personal information over the past 12 months.
+• Right to delete - You have the right to request that we delete any of your personal information that we collected from you and retained, subject to certain exceptions.
+• Right to opt-out of sales - If we sell your personal information, you have the right to opt out of the sale of your information.
+• Right to non-discrimination - We will not discriminate against you for exercising any of your CCPA rights.
 
-- **Right to know** – You have the right to request that we disclose information to you about our collection and use of your personal information over the past 12 months.
-- **Right to delete** – You have the right to request that we delete any of your personal information that we collected from you and retained, subject to certain exceptions.
-- **Right to opt-out of sales** – If we sell your personal information, you have the right to opt out of the sale of your information.
-- **Right to non-discrimination** – We will not discriminate against you for exercising any of your CCPA rights.
-
-To exercise your rights under CCPA, please contact us using the contact information provided below.
+To exercise any of these rights, please contact us.
 `;
   }
 
